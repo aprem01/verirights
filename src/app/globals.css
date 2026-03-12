@@ -2,26 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 222 47% 8%;
+    --foreground: 0 0% 98%;
+    --card: 222 40% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 222 40% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 43 56% 54%;
+    --primary-foreground: 222 47% 8%;
+    --secondary: 222 30% 18%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 222 30% 18%;
+    --muted-foreground: 220 10% 60%;
+    --accent: 43 56% 54%;
+    --accent-foreground: 222 47% 8%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 222 30% 22%;
+    --input: 222 30% 22%;
+    --ring: 43 56% 54%;
+    --radius: 0.5rem;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
   }
 }
+
+/* Score gauge animation */
+.score-gauge-track {
+  fill: none;
+  stroke: hsl(222 30% 18%);
+  stroke-width: 8;
+}
+
+.score-gauge-fill {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  transition: stroke-dashoffset 1.5s ease-out;
+}
+
+/* Analyzing animation dots */
+@keyframes analyzing-dots {
+  0%, 20% { opacity: 0; }
+  40% { opacity: 1; }
+  60%, 100% { opacity: 0; }
+}
+
+.analyzing-dot:nth-child(1) { animation: analyzing-dots 1.4s infinite 0s; }
+.analyzing-dot:nth-child(2) { animation: analyzing-dots 1.4s infinite 0.2s; }
+.analyzing-dot:nth-child(3) { animation: analyzing-dots 1.4s infinite 0.4s; }
